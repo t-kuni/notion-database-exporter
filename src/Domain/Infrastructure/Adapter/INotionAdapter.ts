@@ -38,7 +38,7 @@ export interface QueryDatabaseResultSelect {
     type: "select"
     select: {
         name: string
-    }
+    } | null
 }
 
 export interface QueryDatabaseResultMultiSelect {

@@ -27,6 +27,7 @@ export class NotionDbToArrayService {
     private takeValueFromProp(prop: QueryDatabaseResultProps) {
         switch (prop.type) {
             case "select":
+                if (prop.select === null) return ""
                 return prop.select.name
             case "multi_select":
                 return prop.multi_select.reduce((prev, curr) => {
