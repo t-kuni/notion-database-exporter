@@ -1,9 +1,8 @@
-import {INotionAdapter} from "../../Domain/Infrastructure/Adapter/INotionAdapter";
+import {FetchDatabaseResult, INotionAdapter} from "../../Domain/Infrastructure/Adapter/INotionAdapter";
 import {Client} from "@notionhq/client";
 import {inject, injectable} from "tsyringe";
 import {DI} from "../../diTokens";
 import {ConfigReadService} from "../../Application/Services/ConfigReadService";
-import {SearchResponse} from "@notionhq/client/build/src/api-endpoints";
 
 @injectable()
 export class NotionAdapter implements INotionAdapter {
@@ -21,14 +20,13 @@ export class NotionAdapter implements INotionAdapter {
         })
     }
 
-    async fetchDatabaseList(): Promise<SearchResponse> {
+    async fetchDatabaseList(): Promise<FetchDatabaseResult> {
         const response = await this.client.search({
-            query: 'task',
-            sort: {
-                direction: 'ascending',
-                timestamp: 'last_edited_time',
-            },
+            filter: {
+                value: "database",
+                property: "object"
+            }
         });
-        return response;
+        return response as FetchDatabaseResult;
     }
 }

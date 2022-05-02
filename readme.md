@@ -1,15 +1,5 @@
 # About
 
-Project skeleton for TypeScript CLI application.
-
-# Usage
-
-```
-git clone --depth 1 https://github.com/t-kuni/ts-cli-app-skeleton.git [ProjectName]
-cd [ProjectName]
-rm -rf .git 
-npm install
-```
 
 # Build application
 

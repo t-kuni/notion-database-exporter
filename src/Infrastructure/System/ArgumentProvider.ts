@@ -9,6 +9,7 @@ export class ArgumentProvider implements IArgumentProvider {
     constructor() {
         this.args = parse<Arguments>({
             config: {type: String, alias: 'c', optional: true, defaultValue: Const.DEFAULT_CONFIG_PATH},
+            list: {type: Boolean, alias: 'l', optional: true, defaultValue: true},
         }, {
             stopAtFirstUnknown: true
         });
