@@ -1,4 +1,9 @@
-import {FetchDatabaseResult, INotionAdapter} from "../../Domain/Infrastructure/Adapter/INotionAdapter";
+import {
+    FetchDatabaseResult,
+    INotionAdapter,
+    QueryDatabaseResult,
+    RetrieveDatabaseResult
+} from "../../Domain/Infrastructure/Adapter/INotionAdapter";
 import {Client} from "@notionhq/client";
 import {inject, injectable} from "tsyringe";
 import {DI} from "../../diTokens";
@@ -28,5 +33,15 @@ export class NotionAdapter implements INotionAdapter {
             }
         });
         return response as FetchDatabaseResult;
+    }
+
+    async queryDatabase(id: string): Promise<QueryDatabaseResult> {
+        const response = await this.client.databases.query({database_id: id});
+        return response as QueryDatabaseResult;
+    }
+
+    async retrieveDatabase(id: string): Promise<RetrieveDatabaseResult> {
+        const response = await this.client.databases.retrieve({database_id: id});
+        return response as RetrieveDatabaseResult;
     }
 }

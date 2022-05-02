@@ -5,6 +5,7 @@ export const DI = {
         Services: {
             ExampleService: uuidv4(),
             ConfigReadService: uuidv4(),
+            NotionDbToArrayService: uuidv4(),
         },
         UseCases: {
             ExampleInteractor: uuidv4(),
@@ -22,6 +23,7 @@ export const DI = {
                 IArgumentProvider: uuidv4(),
                 IStdOut: uuidv4(),
                 ITextReader: uuidv4(),
+                ITextWriter: uuidv4(),
             }
         }
     },

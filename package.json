@@ -13,6 +13,8 @@
     "@notionhq/client": "^1.0.4",
     "@types/jest": "^27.4.1",
     "@types/uuid": "^8.3.4",
+    "csv": "^6.0.5",
+    "csv-stringify": "^6.0.5",
     "dotenv": "^16.0.0",
     "fork-ts-checker-webpack-plugin": "^7.2.9",
     "i": "^0.3.7",
