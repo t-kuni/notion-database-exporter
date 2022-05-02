@@ -23,6 +23,7 @@ export interface QueryDatabaseResult {
 
 export type QueryDatabaseResultProps =
     | QueryDatabaseResultSelect
+    | QueryDatabaseResultMultiSelect
     | QueryDatabaseResultRichText
     | QueryDatabaseResultTitle
     | QueryDatabaseResultRelation
@@ -37,6 +38,13 @@ export interface QueryDatabaseResultSelect {
     select: {
         name: string
     }
+}
+
+export interface QueryDatabaseResultMultiSelect {
+    type: "multi_select"
+    multi_select: Array<{
+        name: string
+    }>
 }
 
 export interface QueryDatabaseResultRichText {
@@ -65,6 +73,9 @@ export interface QueryDatabaseResultFormula {
     formula: {
         type: "string"
         string: string
+    } | {
+        type: "number"
+        number: number
     }
 }
 

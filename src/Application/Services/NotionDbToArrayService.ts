@@ -28,6 +28,11 @@ export class NotionDbToArrayService {
         switch (prop.type) {
             case "select":
                 return prop.select.name
+            case "multi_select":
+                return prop.multi_select.reduce((prev, curr) => {
+                    if (prev != "") prev += ',';
+                    return prev + curr.name;
+                }, "")
             case "title":
                 if (prop.title.length == 0) return "";
                 return prop.title[0].plain_text
@@ -43,8 +48,10 @@ export class NotionDbToArrayService {
                 switch (prop.formula.type) {
                     case "string":
                         return prop.formula.string
+                    case "number":
+                        return prop.formula.number
                     default:
-                        throw new Error(`Detect unsupported property type \"${prop.formula.type}\"`)
+                        throw new Error(`Detect unsupported property type \"${prop.formula["type"]}\"`)
                 }
             case "number":
                 return prop.number.toString();
