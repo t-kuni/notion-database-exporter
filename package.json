@@ -1,7 +1,7 @@
 {
-  "name": "ts-cli-app-skeleton",
+  "name": "notion-database-exporter",
   "version": "1.0.0",
-  "description": "Project skeleton for TypeScript CLI application.",
+  "description": "",
   "scripts": {
     "test": "jest",
     "watch": "webpack --watch --config webpack.config.js",
