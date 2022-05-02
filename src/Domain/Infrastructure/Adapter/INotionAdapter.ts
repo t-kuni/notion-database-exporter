@@ -75,12 +75,12 @@ export interface QueryDatabaseResultFormula {
         string: string
     } | {
         type: "number"
-        number: number
+        number: number | null
     }
 }
 
 export interface QueryDatabaseResultNumber {
-    type: "number",
+    type: "number"
     number: number
 }
 

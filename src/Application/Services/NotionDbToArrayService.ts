@@ -54,6 +54,7 @@ export class NotionDbToArrayService {
                         throw new Error(`Detect unsupported property type \"${prop.formula["type"]}\"`)
                 }
             case "number":
+                if (prop.number === null) return "";
                 return prop.number.toString();
             case "rollup":
                 return this.takeValueFromProp(prop.rollup)
