@@ -28,15 +28,6 @@ export class ExampleInteractor {
         this.service.exec();
 
         const args = this.argumentProvider.getArgs();
-        const config = this.configReader.read(args.config)
-
-        this.stdOut.println(`Hello! ${config.name}<${config.email}>`)
-
-        const msg = args.message
-        if (msg.length > 0) {
-            this.stdOut.println('message: ' + msg)
-        } else {
-            this.stdOut.println('message: (message option didn\'t specified)')
-        }
+        const config = this.configReader.read()
     }
 }

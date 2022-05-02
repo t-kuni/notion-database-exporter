@@ -3,3 +3,4 @@
 node_modules
 dist
 releases
+notion-db-exporter.yml

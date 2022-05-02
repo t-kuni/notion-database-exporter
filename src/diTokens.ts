@@ -12,6 +12,9 @@ export const DI = {
     },
     Domain: {
         Infrastructure: {
+            Adapters: {
+                INotionAdapter: uuidv4()
+            },
             Repositories: {
                 IExampleRepository: uuidv4(),
             },

@@ -8,8 +8,7 @@ import {StdOut} from "./Infrastructure/System/StdOut";
 import {TextReader} from "./Infrastructure/System/TextReader";
 import {ConfigReadService} from "./Application/Services/ConfigReadService";
 import {DI} from "./diTokens";
-
-console.log("container initialize")
+import {NotionAdapter} from "./Infrastructure/Adapter/NotionAdapter";
 
 // Application / UseCases
 container.register(DI.Application.UseCases.ExampleInteractor, {useClass: ExampleInteractor});
@@ -17,6 +16,9 @@ container.register(DI.Application.UseCases.ExampleInteractor, {useClass: Example
 // Application / Services
 container.register(DI.Application.Services.ExampleService, {useClass: ExampleService});
 container.register(DI.Application.Services.ConfigReadService, {useClass: ConfigReadService});
+
+// Domain / Infrastructure / Adapter
+container.register(DI.Domain.Infrastructure.Adapters.INotionAdapter, {useClass: NotionAdapter});
 
 // Domain / Infrastructure / Repository
 container.register(DI.Domain.Infrastructure.Repositories.IExampleRepository, {useClass: ExampleRepository});

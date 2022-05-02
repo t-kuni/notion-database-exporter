@@ -10,10 +10,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@notionhq/client": "^1.0.4",
     "@types/jest": "^27.4.1",
     "@types/uuid": "^8.3.4",
     "dotenv": "^16.0.0",
     "fork-ts-checker-webpack-plugin": "^7.2.9",
+    "i": "^0.3.7",
     "jest": "^27.0.0",
     "jest-ts-auto-mock": "^2.1.0",
     "moment": "^2.29.3",
