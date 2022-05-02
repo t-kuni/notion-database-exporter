@@ -33,6 +33,8 @@ export class NotionDbToArrayService {
                     if (prev != "") prev += ',';
                     return prev + curr.name;
                 }, "")
+            case "checkbox":
+                return prop.checkbox.toString();
             case "title":
                 if (prop.title.length == 0) return "";
                 return prop.title[0].plain_text

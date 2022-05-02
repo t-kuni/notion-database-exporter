@@ -27,6 +27,7 @@ describe('NotionDbToArrayService#toArray', () => {
                 "PROP7": {},
                 "PROP8": {},
                 "PROP9": {},
+                "PROP10": {},
             }
         } as RetrieveDatabaseResult
         const queryResult = {
@@ -115,6 +116,10 @@ describe('NotionDbToArrayService#toArray', () => {
                             type: "number",
                             number: null,
                         },
+                        "PROP10": {
+                            type: "checkbox",
+                            checkbox: true,
+                        },
                     }
                 }
             ],
@@ -136,6 +141,7 @@ describe('NotionDbToArrayService#toArray', () => {
                 "PROP7",
                 "PROP8",
                 "PROP9",
+                "PROP10",
             ],
             [
                 "PROP1_VALUE1",
@@ -147,6 +153,7 @@ describe('NotionDbToArrayService#toArray', () => {
                 "PROP7_VALUE1,200",
                 "PROP8_VALUE1,PROP8_VALUE2",
                 "",
+                "true",
             ],
         ]
         assert.deepEqual(actual, expect);

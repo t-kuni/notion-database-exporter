@@ -24,6 +24,7 @@ export interface QueryDatabaseResult {
 export type QueryDatabaseResultProps =
     | QueryDatabaseResultSelect
     | QueryDatabaseResultMultiSelect
+    | QueryDatabaseResultCheckBox
     | QueryDatabaseResultRichText
     | QueryDatabaseResultTitle
     | QueryDatabaseResultRelation
@@ -45,6 +46,11 @@ export interface QueryDatabaseResultMultiSelect {
     multi_select: Array<{
         name: string
     }>
+}
+
+export interface QueryDatabaseResultCheckBox {
+    type: "checkbox"
+    checkbox: boolean
 }
 
 export interface QueryDatabaseResultRichText {
