@@ -24,6 +24,7 @@ export const DI = {
                 IStdOut: uuidv4(),
                 ITextReader: uuidv4(),
                 ITextWriter: uuidv4(),
+                IDirectory: uuidv4()
             }
         }
     },

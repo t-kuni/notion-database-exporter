@@ -8,9 +8,6 @@ import {DI} from "./diTokens";
         const interactor = container.resolve<ExampleInteractor>(DI.Application.UseCases.ExampleInteractor);
         await interactor.exec();
     } catch (e) {
-        //
-        // Do any error handling.
-        //
-        throw e;
+        console.error(e);
     }
 })();

@@ -10,6 +10,7 @@ import {ConfigReadService} from "./Application/Services/ConfigReadService";
 import {DI} from "./diTokens";
 import {NotionAdapter} from "./Infrastructure/Adapter/NotionAdapter";
 import {TextWriter} from "./Infrastructure/System/TextWriter";
+import {Directory} from "./Infrastructure/System/Directory";
 
 // Application / UseCases
 container.register(DI.Application.UseCases.ExampleInteractor, {useClass: ExampleInteractor});
@@ -30,3 +31,4 @@ container.register(DI.Domain.Infrastructure.System.IArgumentProvider, {useClass:
 container.register(DI.Domain.Infrastructure.System.IStdOut, {useClass: StdOut});
 container.register(DI.Domain.Infrastructure.System.ITextReader, {useClass: TextReader});
 container.register(DI.Domain.Infrastructure.System.ITextWriter, {useClass: TextWriter});
+container.register(DI.Domain.Infrastructure.System.IDirectory, {useClass: Directory});

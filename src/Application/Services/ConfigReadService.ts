@@ -18,7 +18,7 @@ export class ConfigReadService {
         this.textReader = textReader;
     }
 
-    read(): Config|null {
+    read(): Config {
         let configYaml;
         try {
             configYaml = this.textReader.read(this.getConfigPath())
