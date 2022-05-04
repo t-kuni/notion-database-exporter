@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "test": "jest",
-    "watch": "webpack --watch --config webpack.config.js",
+    "watch": "webpack --watch --config webpack.config.js --mode development",
     "build": "webpack --config webpack.config.js --mode production"
   },
   "author": "",
@@ -19,6 +19,7 @@
     "fork-ts-checker-webpack-plugin": "^7.2.9",
     "i": "^0.3.7",
     "jest": "^27.0.0",
+    "jest-mock-promise": "^2.0.2",
     "jest-ts-auto-mock": "^2.1.0",
     "moment": "^2.29.3",
     "moment-timezone": "^0.5.34",

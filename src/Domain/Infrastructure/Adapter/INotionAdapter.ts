@@ -1,24 +1,32 @@
 export interface INotionAdapter {
-    fetchDatabaseList(): Promise<FetchDatabaseResult>;
-    queryDatabase(id: string): Promise<QueryDatabaseResult>;
+    fetchDatabaseList(startCursor: string = null): Promise<FetchDatabaseResult>;
+
+    queryDatabase(id: string, startCursor: string = null): Promise<QueryDatabaseResult>;
+
     retrieveDatabase(id: string): Promise<RetrieveDatabaseResult>;
 }
 
 export interface FetchDatabaseResult {
     object: "list"
-    results: Array<{
-        id: string
-        title: Array<{
-            plain_text: string
-        }>
+    results: Array<FetchDatabaseResultDatabase>
+    next_cursor: string | null
+}
+
+export interface FetchDatabaseResultDatabase {
+    id: string
+    title: Array<{
+        plain_text: string
     }>
 }
 
 export interface QueryDatabaseResult {
     object: "list"
-    results: Array<{
-        properties: Record<string, QueryDatabaseResultProps>
-    }>
+    results: Array<QueryDatabaseResultRow>
+    next_cursor: string | null
+}
+
+export interface QueryDatabaseResultRow {
+    properties: Record<string, QueryDatabaseResultProps>
 }
 
 export type QueryDatabaseResultProps =

@@ -8,11 +8,12 @@ import {INotionAdapter} from "../../Domain/Infrastructure/Adapter/INotionAdapter
 import {stringify as csvStringify} from 'csv-stringify/sync';
 import {IDirectory} from "../../Domain/Infrastructure/System/IDirectory";
 import {ITextWriter} from "../../Domain/Infrastructure/System/ITextWriter";
+import {INotionAccessService} from "../Services/INotionAccessService";
 
 @injectable()
 export class ExampleInteractor {
-    private service: NotionDbToArrayService;
     private notionAdapter: INotionAdapter;
+    private notionAccessService: INotionAccessService;
     private textWriter: ITextWriter;
     private directory: IDirectory;
     private notionDbToArrayService: NotionDbToArrayService;
@@ -21,15 +22,16 @@ export class ExampleInteractor {
     private argumentProvider: ArgumentProvider;
 
     constructor(
-        @inject(DI.Application.Services.ExampleService) service: NotionDbToArrayService,
         @inject(DI.Domain.Infrastructure.System.IStdOut) stdOut: StdOut,
         @inject(DI.Domain.Infrastructure.System.IArgumentProvider) argumentProvider: ArgumentProvider,
         @inject(DI.Application.Services.ConfigReadService) configReader: ConfigReadService,
         @inject(DI.Domain.Infrastructure.Adapters.INotionAdapter) notionAdapter: INotionAdapter,
         @inject(DI.Application.Services.NotionDbToArrayService) notionDbToArrayService: NotionDbToArrayService,
+        @inject(DI.Application.Services.INotionAccessService) notionAccessService: INotionAccessService,
         @inject(DI.Domain.Infrastructure.System.IDirectory) directory: IDirectory,
         @inject(DI.Domain.Infrastructure.System.ITextWriter) textWriter: ITextWriter,
     ) {
+        this.notionAccessService = notionAccessService;
         this.textWriter = textWriter;
         this.directory = directory;
         this.notionDbToArrayService = notionDbToArrayService;
@@ -37,23 +39,21 @@ export class ExampleInteractor {
         this.configReader = configReader;
         this.stdOut = stdOut;
         this.argumentProvider = argumentProvider;
-        this.service = service;
     }
 
     async exec() {
-        const args = this.argumentProvider.getArgs();
         const config = this.configReader.read();
 
-        const response = await this.notionAdapter.fetchDatabaseList()
-        for (const result of response.results) {
-            const title = result.title[0].plain_text;
-            const id = result.id;
+        const databases = await this.notionAccessService.fetchDatabases();
+        for (const database of databases) {
+            const title = database.title[0].plain_text;
+            const id = database.id;
             this.stdOut.println(`${title} (${id})`)
 
             const retrieveResult = await this.notionAdapter.retrieveDatabase(id)
-            const queryResult = await this.notionAdapter.queryDatabase(id)
-            const rows = this.notionDbToArrayService.toArray(retrieveResult, queryResult)
-            const csvText = csvStringify(rows)
+            const rows = await this.notionAccessService.queryDatabaseRows(id)
+            const csvRows = this.notionDbToArrayService.toArray(retrieveResult, rows)
+            const csvText = csvStringify(csvRows)
             this.directory.mkdir(config.outDir)
             const outPath = `${config.outDir}/${title}.csv`
             this.textWriter.write(outPath, csvText)

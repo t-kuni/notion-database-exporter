@@ -6,6 +6,7 @@ export const DI = {
             ExampleService: uuidv4(),
             ConfigReadService: uuidv4(),
             NotionDbToArrayService: uuidv4(),
+            INotionAccessService: uuidv4(),
         },
         UseCases: {
             ExampleInteractor: uuidv4(),

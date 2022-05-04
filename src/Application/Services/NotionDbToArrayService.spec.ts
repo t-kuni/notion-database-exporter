@@ -2,38 +2,37 @@ import "../../bootstrap";
 import {container} from "tsyringe";
 import {NotionDbToArrayService} from "./NotionDbToArrayService";
 import {DI} from "../../diTokens";
-import {QueryDatabaseResult, RetrieveDatabaseResult} from "../../Domain/Infrastructure/Adapter/INotionAdapter";
+import {QueryDatabaseResultRow, RetrieveDatabaseResult} from "../../Domain/Infrastructure/Adapter/INotionAdapter";
 
 const assert = require('assert');
 
-describe('NotionDbToArrayService#toArray', () => {
-    it('toArray', async () => {
-        /*
-         * Prepare
-         */
+describe('NotionDbToArrayService', () => {
+    describe('toArray', () => {
+        test('Should return normal value', async () => {
+            /*
+             * Prepare
+             */
 
-        /*
-         * Run
-         */
-        const retrieveResult = {
-            object: "database",
-            properties: {
-                "PROP1": {},
-                "PROP2": {},
-                "PROP3": {},
-                "PROP4": {},
-                "PROP5": {},
-                "PROP6": {},
-                "PROP7": {},
-                "PROP8": {},
-                "PROP9": {},
-                "PROP10": {},
-                "PROP11": {},
-            }
-        } as RetrieveDatabaseResult
-        const queryResult = {
-            object: "list",
-            results: [
+            /*
+             * Run
+             */
+            const retrieveResult = {
+                object: "database",
+                properties: {
+                    "PROP1": {},
+                    "PROP2": {},
+                    "PROP3": {},
+                    "PROP4": {},
+                    "PROP5": {},
+                    "PROP6": {},
+                    "PROP7": {},
+                    "PROP8": {},
+                    "PROP9": {},
+                    "PROP10": {},
+                    "PROP11": {},
+                }
+            } as RetrieveDatabaseResult
+            const rows = [
                 {
                     properties: {
                         "PROP1": {
@@ -127,42 +126,42 @@ describe('NotionDbToArrayService#toArray', () => {
                         },
                     }
                 }
-            ],
-        } as QueryDatabaseResult
-        const testee = container.resolve<NotionDbToArrayService>(DI.Application.Services.NotionDbToArrayService);
-        const actual = testee.toArray(retrieveResult, queryResult);
+            ] as Array<QueryDatabaseResultRow>
+            const testee = container.resolve<NotionDbToArrayService>(DI.Application.Services.NotionDbToArrayService);
+            const actual = testee.toArray(retrieveResult, rows);
 
-        /*
-         * Assert
-         */
-        const expect = [
-            [
-                "PROP1",
-                "PROP2",
-                "PROP3",
-                "PROP4",
-                "PROP5",
-                "PROP6",
-                "PROP7",
-                "PROP8",
-                "PROP9",
-                "PROP10",
-                "PROP11",
-            ],
-            [
-                "PROP1_VALUE1",
-                "PROP2_VALUE1",
-                "PROP3_VALUE1",
-                "PROP4_VALUE1_ITEM1,PROP4_VALUE1_ITEM2",
-                "PROP5_VALUE1",
-                "100",
-                "PROP7_VALUE1,200",
-                "PROP8_VALUE1,PROP8_VALUE2",
-                "",
-                "true",
-                "",
-            ],
-        ]
-        assert.deepEqual(actual, expect);
+            /*
+             * Assert
+             */
+            const expect = [
+                [
+                    "PROP1",
+                    "PROP2",
+                    "PROP3",
+                    "PROP4",
+                    "PROP5",
+                    "PROP6",
+                    "PROP7",
+                    "PROP8",
+                    "PROP9",
+                    "PROP10",
+                    "PROP11",
+                ],
+                [
+                    "PROP1_VALUE1",
+                    "PROP2_VALUE1",
+                    "PROP3_VALUE1",
+                    "PROP4_VALUE1_ITEM1,PROP4_VALUE1_ITEM2",
+                    "PROP5_VALUE1",
+                    "100",
+                    "PROP7_VALUE1,200",
+                    "PROP8_VALUE1,PROP8_VALUE2",
+                    "",
+                    "true",
+                    "",
+                ],
+            ]
+            assert.deepEqual(actual, expect);
+        });
     });
 });

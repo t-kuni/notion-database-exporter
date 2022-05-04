@@ -1,5 +1,8 @@
 # About
 
+- [ ] pagination
+- [ ] filtering database by includes, excludes
+- [ ] sort properties
 
 # Build application
 

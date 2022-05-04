@@ -1,27 +1,27 @@
 import {
-    QueryDatabaseResult,
     QueryDatabaseResultProps,
+    QueryDatabaseResultRow,
     RetrieveDatabaseResult
 } from "../../Domain/Infrastructure/Adapter/INotionAdapter";
 
 export class NotionDbToArrayService {
-    toArray(retrieveResult: RetrieveDatabaseResult, queryResult: QueryDatabaseResult): Array<Array<String>> {
-        const rows = new Array<Array<String>>();
+    toArray(retrieveResult: RetrieveDatabaseResult, rows: Array<QueryDatabaseResultRow>): Array<Array<String>> {
+        const csvRows = new Array<Array<String>>();
 
         const propNames = Object.keys(retrieveResult.properties);
-        rows.push(propNames);
+        csvRows.push(propNames);
 
-        queryResult.results.forEach((result) => {
-            const row = new Array<String>()
+        rows.forEach((row) => {
+            const csvRow = new Array<String>()
             propNames.forEach((propName) => {
-                const prop = result.properties[propName];
+                const prop = row.properties[propName];
                 const value = this.takeValueFromProp(prop);
-                row.push(value)
+                csvRow.push(value)
             })
-            rows.push(row)
+            csvRows.push(csvRow)
         })
 
-        return rows;
+        return csvRows;
     }
 
     private takeValueFromProp(prop: QueryDatabaseResultProps) {
