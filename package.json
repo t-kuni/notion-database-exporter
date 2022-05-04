@@ -1,6 +1,6 @@
 {
   "name": "notion-database-exporter",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "This tool exports Notion's database in csv format.",
   "scripts": {
     "test": "jest",
