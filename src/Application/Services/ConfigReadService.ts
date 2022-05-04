@@ -4,6 +4,7 @@ import {ITextReader} from "../../Domain/Infrastructure/System/ITextReader";
 import Config from "../../Domain/Models/Config";
 import {parse} from "yaml";
 import {IArgumentProvider} from "../../Domain/Infrastructure/System/IArgumentProvider";
+import Const from "../../const";
 
 @injectable()
 @singleton()
@@ -36,7 +37,7 @@ export class ConfigReadService {
                 throw err;
             }
         }
-        return this.configCache = parse(configYaml) as Config
+        return this.configCache = this.complement(parse(configYaml) as Config)
     }
 
     private getConfigPath(): string {
@@ -46,10 +47,26 @@ export class ConfigReadService {
 
     private getDefaultConfig(): Config {
         return {
-            notionToken: "",
-            outDir: "./notion-db-csv",
+            outDir: Const.DEFAULT_OUT_DIR,
             excludes: [],
             includes: []
         } as Config
+    }
+
+    private complement(config: Config): Config {
+        if (!config || typeof config !== 'object') {
+            return this.getDefaultConfig()
+        }
+
+        if (!config.outDir || typeof config.outDir !== 'string') {
+            config.outDir = Const.DEFAULT_OUT_DIR
+        }
+        if (!Array.isArray(config.excludes)) {
+            config.excludes = []
+        }
+        if (!Array.isArray(config.includes)) {
+            config.includes = []
+        }
+        return config;
     }
 }
