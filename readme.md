@@ -1,10 +1,9 @@
-# About
+# notion-database-exporter
 
-- [ ] pagination
-- [ ] filtering database by includes, excludes
-- [ ] sort properties
+This tool exports Notion's database in csv format.
 
-# Build application
+# Development
+## Build
 
 ```
 npm run build
@@ -12,25 +11,25 @@ npm run build
 npm run watch
 ```
 
-# Run application
+## Run
 
 ```
 node dist/example.js
 ```
 
-# Run tests
+## Run tests
 
 ```
 npm run test
 ```
 
-# Build container
+## Build container
 
 ```
 docker build --tag example-container .
 ```
 
-# Run container
+## Run container
 
 ```
 docker run example-container example
@@ -46,5 +45,5 @@ npm install
 # Check
 npm run test
 npm run build
-node dist/example.js --message="Test Message" --config=config.example.yml
+node dist/example.js
 ```
