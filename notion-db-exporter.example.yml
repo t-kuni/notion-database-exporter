@@ -1,4 +1,3 @@
-notionToken: XXXX
 outDir: './notion-db-csv'
 
 # if want to filter database by title or id so enable below

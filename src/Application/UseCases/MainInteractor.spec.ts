@@ -55,7 +55,6 @@ describe('MainInteractor', () => {
                     const fn = mock.read = jest.fn()
                     fn.mockReturnValue({
                         outDir: 'TEST_OUT_DIR',
-                        notionToken: 'TEST_NOTION_TOKEN'
                     } as Config);
                     mockAsserts.push(() => {
                     })

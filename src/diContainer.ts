@@ -12,12 +12,14 @@ import {TextWriter} from "./Infrastructure/System/TextWriter";
 import {Directory} from "./Infrastructure/System/Directory";
 import {NotionAccessService} from "./Application/Services/NotionAccessService";
 import {TargetDatabaseCheckService} from "./Application/Services/TargetDatabaseCheckService";
+import {SecretReadService} from "./Application/Services/SecretReadService";
 
 // Application / UseCases
 container.register(DI.Application.UseCases.MainInteractor, {useClass: MainInteractor});
 
 // Application / Services
 container.register(DI.Application.Services.ConfigReadService, {useClass: ConfigReadService});
+container.register(DI.Application.Services.SecretReadService, {useClass: SecretReadService});
 container.register(DI.Application.Services.NotionDbToArrayService, {useClass: NotionDbToArrayService});
 container.register(DI.Application.Services.INotionAccessService, {useClass: NotionAccessService});
 container.register(DI.Application.Services.ITargetDatabaseCheckService, {useClass: TargetDatabaseCheckService});

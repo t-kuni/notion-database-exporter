@@ -1,5 +1,4 @@
 export default interface Config {
-    notionToken: string;
     outDir: string;
     includes: Array<ConfigTargetDatabase>
     excludes: Array<ConfigTargetDatabase>

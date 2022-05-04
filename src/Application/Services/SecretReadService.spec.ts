@@ -2,15 +2,15 @@ import "../../bootstrap";
 import {container} from "tsyringe";
 import {DI} from "../../diTokens";
 import {createMock} from "ts-auto-mock";
-import {ConfigReadService} from "./ConfigReadService";
+import {SecretReadService} from "./SecretReadService";
 import {IArgumentProvider} from "../../Domain/Infrastructure/System/IArgumentProvider";
 import {Arguments} from "../../Domain/Models/Arguments";
 import {ITextReader} from "../../Domain/Infrastructure/System/ITextReader";
-import Config from "../../Domain/Models/Config";
+import Secret from "../../Domain/Models/Secret";
 
 const assert = require('assert');
 
-describe('ConfigReadService', () => {
+describe('SecretReadService', () => {
     describe("read", () => {
         test('Should return normal value', async () => {
             /*
@@ -22,8 +22,7 @@ describe('ConfigReadService', () => {
                 {
                     const fn = mock.getArgs = jest.fn()
                     fn.mockReturnValue({
-                        config: "CONFIG_PATH",
-                        list: true
+                        secret: "SECRET_PATH"
                     } as Arguments)
                     mockAsserts.push(() => {
                     })
@@ -35,13 +34,11 @@ describe('ConfigReadService', () => {
                 {
                     const fn = mock.read = jest.fn()
                     const yaml = `
-outDir: OUT_DIR
-includes:
-  - title: "DB_TITLE"
+notionToken: NOTION_TOKEN
                     `
                     fn.mockReturnValue(yaml)
                     mockAsserts.push(() => {
-                        expect(fn.mock.calls[0][0]).toBe("CONFIG_PATH");
+                        expect(fn.mock.calls[0][0]).toBe("SECRET_PATH");
                     })
                 }
                 container.register(DI.Domain.Infrastructure.System.ITextReader, {useValue: mock});
@@ -50,20 +47,15 @@ includes:
             /*
              * Run
              */
-            const testee = container.resolve<ConfigReadService>(DI.Application.Services.ConfigReadService);
+            const testee = container.resolve<SecretReadService>(DI.Application.Services.SecretReadService);
             const actual = testee.read();
 
             /*
              * Assert
              */
             const exp = {
-                outDir: "OUT_DIR",
-                includes: [
-                    {
-                        title: "DB_TITLE"
-                    }
-                ],
-            } as Config
+                notionToken: "NOTION_TOKEN",
+            } as Secret
             assert.deepEqual(actual, exp);
 
             mockAsserts.forEach(asserts => asserts())

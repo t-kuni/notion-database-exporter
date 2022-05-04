@@ -7,7 +7,7 @@ import {
 import {Client} from "@notionhq/client";
 import {inject, injectable} from "tsyringe";
 import {DI} from "../../diTokens";
-import {ConfigReadService} from "../../Application/Services/ConfigReadService";
+import {SecretReadService} from "../../Application/Services/SecretReadService";
 import {QueryDatabaseParameters, SearchParameters} from "@notionhq/client/build/src/api-endpoints";
 
 @injectable()
@@ -15,9 +15,9 @@ export class NotionAdapter implements INotionAdapter {
     private client: Client;
 
     constructor(
-        @inject(DI.Application.Services.ConfigReadService) configReader: ConfigReadService,
+        @inject(DI.Application.Services.SecretReadService) secretReader: SecretReadService,
     ) {
-        const config = configReader.read();
+        const config = secretReader.read();
 
         if (config.notionToken == "") throw new Error("API token of Notion isn't specified")
 
