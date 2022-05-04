@@ -46,6 +46,25 @@ export class ExampleInteractor {
     }
 
     async exec() {
+        const args = this.argumentProvider.getArgs();
+        if (args.export) {
+            await this.export()
+        } else {
+            await this.list()
+        }
+    }
+
+    private async list() {
+        const databases = await this.notionAccessService.fetchDatabases();
+        for (const database of databases) {
+            const title = database.title[0].plain_text;
+            const id = database.id;
+
+            this.stdOut.println(`${title} (${id})`)
+        }
+    }
+
+    private async export() {
         const config = this.configReader.read();
 
         const databases = await this.notionAccessService.fetchDatabases();

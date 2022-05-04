@@ -10,6 +10,7 @@ export class ArgumentProvider implements IArgumentProvider {
         this.args = parse<Arguments>({
             config: {type: String, alias: 'c', optional: true, defaultValue: Const.DEFAULT_CONFIG_PATH},
             list: {type: Boolean, alias: 'l', optional: true, defaultValue: true},
+            export: {type: Boolean, alias: 'e', optional: true, defaultValue: false},
         }, {
             stopAtFirstUnknown: true
         });
