@@ -7,6 +7,9 @@
     "watch": "webpack --watch --config webpack.config.js --mode development",
     "build": "webpack --config webpack.config.js --mode production"
   },
+  "bin": {
+    "notion-database-exporter": "dist/main.js"
+  },
   "author": "t-kuni",
   "license": "MIT",
   "devDependencies": {

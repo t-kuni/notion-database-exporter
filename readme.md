@@ -2,6 +2,14 @@
 
 This tool exports Notion's database in csv format.
 
+# Usage (node/npm)
+
+Install command
+
+```
+npm i -g notion-database-exporter
+```
+
 # Development
 ## Build
 
