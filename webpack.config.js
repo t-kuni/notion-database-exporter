@@ -4,7 +4,7 @@ module.exports = {
         __dirname: true,
     },
     entry  : {
-        example: './src/example.ts',
+        main: './src/main.ts',
     },
     module : {
         rules: [

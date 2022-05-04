@@ -3,23 +3,19 @@ import {v4 as uuidv4} from 'uuid';
 export const DI = {
     Application: {
         Services: {
-            ExampleService: uuidv4(),
             ConfigReadService: uuidv4(),
             NotionDbToArrayService: uuidv4(),
             INotionAccessService: uuidv4(),
             ITargetDatabaseCheckService: uuidv4()
         },
         UseCases: {
-            ExampleInteractor: uuidv4(),
+            MainInteractor: uuidv4(),
         }
     },
     Domain: {
         Infrastructure: {
             Adapters: {
                 INotionAdapter: uuidv4()
-            },
-            Repositories: {
-                IExampleRepository: uuidv4(),
             },
             System: {
                 IArgumentProvider: uuidv4(),

@@ -1,6 +1,6 @@
 import "../../bootstrap";
 import {container} from "tsyringe";
-import {ExampleInteractor} from "./ExampleInteractor";
+import {MainInteractor} from "./MainInteractor";
 import {IStdOut} from "../../Domain/Infrastructure/System/IStdOut";
 import {createMock} from 'ts-auto-mock';
 import {DI} from "../../diTokens";
@@ -16,16 +16,30 @@ import {
 } from "../../Domain/Infrastructure/Adapter/INotionAdapter";
 import Config from "../../Domain/Models/Config";
 import {IDirectory} from "../../Domain/Infrastructure/System/IDirectory";
+import {IArgumentProvider} from "../../Domain/Infrastructure/System/IArgumentProvider";
+import {Arguments} from "../../Domain/Models/Arguments";
 
 const assert = require('assert');
 
-describe('ExampleInteractor', () => {
+describe('MainInteractor', () => {
     describe('exec', () => {
         test('Should return normal value', async () => {
             /*
              * Prepare
              */
             const mockAsserts = [];
+            {
+                const mock = createMock<IArgumentProvider>();
+                {
+                    const fn = mock.getArgs = jest.fn()
+                    fn.mockReturnValue({
+                        export: true
+                    } as Arguments)
+                    mockAsserts.push(() => {
+                    })
+                }
+                container.register(DI.Domain.Infrastructure.System.IArgumentProvider, {useValue: mock});
+            }
             {
                 const mock = createMock<IStdOut>();
                 {
@@ -125,7 +139,7 @@ describe('ExampleInteractor', () => {
             /*
              * Run
              */
-            const testee = container.resolve<ExampleInteractor>(DI.Application.UseCases.ExampleInteractor);
+            const testee = container.resolve<MainInteractor>(DI.Application.UseCases.MainInteractor);
             await testee.exec();
 
             /*

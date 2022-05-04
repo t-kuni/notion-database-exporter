@@ -1,8 +1,7 @@
 import "reflect-metadata";
 import {container} from "tsyringe";
 import {NotionDbToArrayService} from "./Application/Services/NotionDbToArrayService";
-import {ExampleRepository} from "./Infrastructure/Repositories/ExampleRepository";
-import {ExampleInteractor} from "./Application/UseCases/ExampleInteractor";
+import {MainInteractor} from "./Application/UseCases/MainInteractor";
 import {ArgumentProvider} from "./Infrastructure/System/ArgumentProvider";
 import {StdOut} from "./Infrastructure/System/StdOut";
 import {TextReader} from "./Infrastructure/System/TextReader";
@@ -15,10 +14,9 @@ import {NotionAccessService} from "./Application/Services/NotionAccessService";
 import {TargetDatabaseCheckService} from "./Application/Services/TargetDatabaseCheckService";
 
 // Application / UseCases
-container.register(DI.Application.UseCases.ExampleInteractor, {useClass: ExampleInteractor});
+container.register(DI.Application.UseCases.MainInteractor, {useClass: MainInteractor});
 
 // Application / Services
-container.register(DI.Application.Services.ExampleService, {useClass: NotionDbToArrayService});
 container.register(DI.Application.Services.ConfigReadService, {useClass: ConfigReadService});
 container.register(DI.Application.Services.NotionDbToArrayService, {useClass: NotionDbToArrayService});
 container.register(DI.Application.Services.INotionAccessService, {useClass: NotionAccessService});
@@ -26,9 +24,6 @@ container.register(DI.Application.Services.ITargetDatabaseCheckService, {useClas
 
 // Domain / Infrastructure / Adapter
 container.register(DI.Domain.Infrastructure.Adapters.INotionAdapter, {useClass: NotionAdapter});
-
-// Domain / Infrastructure / Repository
-container.register(DI.Domain.Infrastructure.Repositories.IExampleRepository, {useClass: ExampleRepository});
 
 // Domain / Infrastructure / System
 container.register(DI.Domain.Infrastructure.System.IArgumentProvider, {useClass: ArgumentProvider});

@@ -12,7 +12,7 @@ import {INotionAccessService} from "../Services/INotionAccessService";
 import {ITargetDatabaseCheckService} from "../Services/ITargetDatabaseCheckService";
 
 @injectable()
-export class ExampleInteractor {
+export class MainInteractor {
     private notionAdapter: INotionAdapter;
     private notionAccessService: INotionAccessService;
     private textWriter: ITextWriter;

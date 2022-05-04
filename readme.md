@@ -14,7 +14,7 @@ npm run watch
 ## Run
 
 ```
-node dist/example.js
+node dist/main.js
 ```
 
 ## Run tests
@@ -45,5 +45,5 @@ npm install
 # Check
 npm run test
 npm run build
-node dist/example.js
+node dist/main.js
 ```
