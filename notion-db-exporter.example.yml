@@ -1,2 +1,10 @@
 notionToken: XXXX
 outDir: './notion-db-csv'
+
+# if want to filter database by title or id so enable below
+#includes:
+#  - title: "Your Database Title1"
+#  - title: "Your Database Title2"
+#excludes:
+#  - title: "Your Database Title1"
+#  - title: "Your Database Title2"

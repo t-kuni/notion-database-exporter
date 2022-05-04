@@ -39,10 +39,10 @@ describe('ExampleInteractor', () => {
                 const mock = createMock<ConfigReadService>();
                 {
                     const fn = mock.read = jest.fn()
-                    const c = new Config();
-                    c.outDir = 'TEST_OUT_DIR';
-                    c.notionToken = 'TEST_NOTION_TOKEN';
-                    fn.mockReturnValue(c);
+                    fn.mockReturnValue({
+                        outDir: 'TEST_OUT_DIR',
+                        notionToken: 'TEST_NOTION_TOKEN'
+                    } as Config);
                     mockAsserts.push(() => {
                     })
                 }

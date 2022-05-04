@@ -1,4 +1,11 @@
-export default class Config {
-    public notionToken: string = "";
-    public outDir: string = "./notion-db-csv";
+export default interface Config {
+    notionToken: string;
+    outDir: string;
+    includes: Array<ConfigTargetDatabase>
+    excludes: Array<ConfigTargetDatabase>
+}
+
+export interface ConfigTargetDatabase {
+    id: string
+    title: string
 }

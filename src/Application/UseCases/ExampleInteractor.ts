@@ -9,6 +9,7 @@ import {stringify as csvStringify} from 'csv-stringify/sync';
 import {IDirectory} from "../../Domain/Infrastructure/System/IDirectory";
 import {ITextWriter} from "../../Domain/Infrastructure/System/ITextWriter";
 import {INotionAccessService} from "../Services/INotionAccessService";
+import {ITargetDatabaseCheckService} from "../Services/ITargetDatabaseCheckService";
 
 @injectable()
 export class ExampleInteractor {
@@ -17,6 +18,7 @@ export class ExampleInteractor {
     private textWriter: ITextWriter;
     private directory: IDirectory;
     private notionDbToArrayService: NotionDbToArrayService;
+    private targetDatabaseCheckService: ITargetDatabaseCheckService;
     private configReader: ConfigReadService;
     private stdOut: StdOut;
     private argumentProvider: ArgumentProvider;
@@ -30,7 +32,9 @@ export class ExampleInteractor {
         @inject(DI.Application.Services.INotionAccessService) notionAccessService: INotionAccessService,
         @inject(DI.Domain.Infrastructure.System.IDirectory) directory: IDirectory,
         @inject(DI.Domain.Infrastructure.System.ITextWriter) textWriter: ITextWriter,
+        @inject(DI.Application.Services.ITargetDatabaseCheckService) targetDatabaseCheckService: ITargetDatabaseCheckService,
     ) {
+        this.targetDatabaseCheckService = targetDatabaseCheckService;
         this.notionAccessService = notionAccessService;
         this.textWriter = textWriter;
         this.directory = directory;
@@ -48,7 +52,14 @@ export class ExampleInteractor {
         for (const database of databases) {
             const title = database.title[0].plain_text;
             const id = database.id;
-            this.stdOut.println(`${title} (${id})`)
+
+            const includes = Array.isArray(config.includes) ? config.includes : [];
+            const excludes = Array.isArray(config.excludes) ? config.excludes : [];
+            const skip = !this.targetDatabaseCheckService.isTargetDatabase(database, includes, excludes)
+
+            this.stdOut.println((skip ? "(SKIP) " : "") + `${title} (${id})`)
+
+            if (skip) continue;
 
             const retrieveResult = await this.notionAdapter.retrieveDatabase(id)
             const rows = await this.notionAccessService.queryDatabaseRows(id)

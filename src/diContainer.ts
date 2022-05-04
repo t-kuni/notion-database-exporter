@@ -12,6 +12,7 @@ import {NotionAdapter} from "./Infrastructure/Adapter/NotionAdapter";
 import {TextWriter} from "./Infrastructure/System/TextWriter";
 import {Directory} from "./Infrastructure/System/Directory";
 import {NotionAccessService} from "./Application/Services/NotionAccessService";
+import {TargetDatabaseCheckService} from "./Application/Services/TargetDatabaseCheckService";
 
 // Application / UseCases
 container.register(DI.Application.UseCases.ExampleInteractor, {useClass: ExampleInteractor});
@@ -21,6 +22,7 @@ container.register(DI.Application.Services.ExampleService, {useClass: NotionDbTo
 container.register(DI.Application.Services.ConfigReadService, {useClass: ConfigReadService});
 container.register(DI.Application.Services.NotionDbToArrayService, {useClass: NotionDbToArrayService});
 container.register(DI.Application.Services.INotionAccessService, {useClass: NotionAccessService});
+container.register(DI.Application.Services.ITargetDatabaseCheckService, {useClass: TargetDatabaseCheckService});
 
 // Domain / Infrastructure / Adapter
 container.register(DI.Domain.Infrastructure.Adapters.INotionAdapter, {useClass: NotionAdapter});
