@@ -1,3 +1,5 @@
+const ShebangPlugin = require('webpack-shebang-plugin');
+
 module.exports = {
     target : 'node',
     node   : {
@@ -33,5 +35,7 @@ module.exports = {
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
     },
-    plugins: [],
+    plugins: [
+        new ShebangPlugin(),
+    ],
 };

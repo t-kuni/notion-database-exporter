@@ -22,7 +22,7 @@ npm run watch
 ## Run
 
 ```
-node dist/main.js
+dist/main.js
 ```
 
 ## Run tests

@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import './bootstrap';
 import {container} from "tsyringe";
 import {MainInteractor} from "./Application/UseCases/MainInteractor";
