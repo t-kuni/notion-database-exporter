@@ -40,6 +40,7 @@ export type QueryDatabaseResultProps =
     | QueryDatabaseResultNumber
     | QueryDatabaseResultRollup
     | QueryDatabaseResultArray
+    | QueryDatabaseResultFiles
     ;
 
 export interface QueryDatabaseResultSelect {
@@ -106,6 +107,16 @@ export interface QueryDatabaseResultRollup {
 export interface QueryDatabaseResultArray {
     type: "array"
     array: Array<QueryDatabaseResultFormula>
+}
+
+export interface QueryDatabaseResultFiles {
+    type: "files"
+    files: Array<{
+        type: "external"
+        external: {
+            url: string
+        }
+    }>
 }
 
 export interface RetrieveDatabaseResult {

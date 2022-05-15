@@ -30,6 +30,7 @@ describe('NotionDbToArrayService', () => {
                     "PROP9": {},
                     "PROP10": {},
                     "PROP11": {},
+                    "PROP12": {},
                 }
             } as RetrieveDatabaseResult
             const rows = [
@@ -124,6 +125,23 @@ describe('NotionDbToArrayService', () => {
                             type: "select",
                             select: null,
                         },
+                        "PROP12": {
+                            type: "files",
+                            files: [
+                                {
+                                    type: "external",
+                                    external: {
+                                        url: "PROP12_VALUE1"
+                                    }
+                                },
+                                {
+                                    type: "external",
+                                    external: {
+                                        url: "PROP12_VALUE2"
+                                    }
+                                }
+                            ],
+                        },
                     }
                 }
             ] as Array<QueryDatabaseResultRow>
@@ -146,6 +164,7 @@ describe('NotionDbToArrayService', () => {
                     "PROP9",
                     "PROP10",
                     "PROP11",
+                    "PROP12",
                 ],
                 [
                     "PROP1_VALUE1",
@@ -159,6 +178,7 @@ describe('NotionDbToArrayService', () => {
                     "",
                     "true",
                     "",
+                    "PROP12_VALUE1,PROP12_VALUE2",
                 ],
             ]
             assert.deepEqual(actual, expect);

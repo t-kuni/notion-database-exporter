@@ -66,6 +66,16 @@ export class NotionDbToArrayService {
                     if (prev != "") prev += ',';
                     return prev + this.takeValueFromProp(curr);
                 }, "")
+            case "files":
+                return prop.files.reduce((prev, curr) => {
+                    if (prev != "") prev += ',';
+                    switch (curr.type) {
+                        case "external":
+                            return prev + curr.external.url;
+                        default:
+                            throw new Error(`Detect unsupported property type \"${curr.type}\"`)
+                    }
+                }, "")
             default:
                 throw new Error(`Detect unsupported property type \"${prop["type"]}\"`)
         }
