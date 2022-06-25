@@ -139,6 +139,13 @@ describe('NotionDbToArrayService', () => {
                                     external: {
                                         url: "PROP12_VALUE2"
                                     }
+                                },
+                                {
+                                    type: "file",
+                                    name: "PROP12_VALUE3",
+                                    file: {
+                                        url: "DUMMY"
+                                    }
                                 }
                             ],
                         },
@@ -178,7 +185,7 @@ describe('NotionDbToArrayService', () => {
                     "",
                     "true",
                     "",
-                    "PROP12_VALUE1,PROP12_VALUE2",
+                    "PROP12_VALUE1,PROP12_VALUE2,PROP12_VALUE3",
                 ],
             ]
             assert.deepEqual(actual, expect);

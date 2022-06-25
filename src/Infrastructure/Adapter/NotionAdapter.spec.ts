@@ -23,7 +23,7 @@ describe('NotionAdapter', () => {
     describe('queryDatabase', () => {
         test.skip('ping', async () => {
             const testee = container.resolve<INotionAdapter>(DI.Domain.Infrastructure.Adapters.INotionAdapter);
-            const actual = await testee.queryDatabase("5a6db4bb-5695-4986-bc7f-8de99f2a92a9");
+            const actual = await testee.queryDatabase("959e155b-5485-4c80-b418-4c7a9e836a7c");
             expect(actual).not.toBeNull()
         });
     });
@@ -33,7 +33,7 @@ describe('NotionAdapter', () => {
     describe('retrieveDatabase', () => {
         test.skip('ping', async () => {
             const testee = container.resolve<INotionAdapter>(DI.Domain.Infrastructure.Adapters.INotionAdapter);
-            const actual = await testee.retrieveDatabase("5a6db4bb-5695-4986-bc7f-8de99f2a92a9");
+            const actual = await testee.retrieveDatabase("959e155b-5485-4c80-b418-4c7a9e836a7c");
             expect(actual).not.toBeNull()
         });
     });

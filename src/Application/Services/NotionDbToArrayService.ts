@@ -72,8 +72,10 @@ export class NotionDbToArrayService {
                     switch (curr.type) {
                         case "external":
                             return prev + curr.external.url;
+                        case "file":
+                            return prev + curr.name;
                         default:
-                            throw new Error(`Detect unsupported property type \"${curr.type}\"`)
+                            throw new Error(`Detect unsupported property type \"${curr["type"]}\"`)
                     }
                 }, "")
             default:

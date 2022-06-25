@@ -116,6 +116,12 @@ export interface QueryDatabaseResultFiles {
         external: {
             url: string
         }
+    } | {
+        type: "file"
+        name: string
+        file: {
+            url: string
+        }
     }>
 }
 
