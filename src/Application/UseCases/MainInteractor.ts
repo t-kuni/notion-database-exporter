@@ -10,10 +10,12 @@ import {IDirectory} from "../../Domain/Infrastructure/System/IDirectory";
 import {ITextWriter} from "../../Domain/Infrastructure/System/ITextWriter";
 import {INotionAccessService} from "../Services/INotionAccessService";
 import {ITargetDatabaseCheckService} from "../Services/ITargetDatabaseCheckService";
+import {DatabaseTitleReadService} from "../Services/DatabaseTitleReadService";
 
 @injectable()
 export class MainInteractor {
     private notionAdapter: INotionAdapter;
+    private databaseTitleReader: DatabaseTitleReadService;
     private notionAccessService: INotionAccessService;
     private textWriter: ITextWriter;
     private directory: IDirectory;
@@ -33,7 +35,9 @@ export class MainInteractor {
         @inject(DI.Domain.Infrastructure.System.IDirectory) directory: IDirectory,
         @inject(DI.Domain.Infrastructure.System.ITextWriter) textWriter: ITextWriter,
         @inject(DI.Application.Services.ITargetDatabaseCheckService) targetDatabaseCheckService: ITargetDatabaseCheckService,
+        @inject(DI.Application.Services.DatabaseTitleReadService) databaseTitleReader: DatabaseTitleReadService,
     ) {
+        this.databaseTitleReader = databaseTitleReader;
         this.targetDatabaseCheckService = targetDatabaseCheckService;
         this.notionAccessService = notionAccessService;
         this.textWriter = textWriter;
@@ -57,7 +61,7 @@ export class MainInteractor {
     private async list() {
         const databases = await this.notionAccessService.fetchDatabases();
         for (const database of databases) {
-            const title = database.title[0].plain_text;
+            const title = this.databaseTitleReader.read(database);
             const id = database.id;
 
             this.stdOut.println(`${title} (${id})`)
@@ -69,7 +73,7 @@ export class MainInteractor {
 
         const databases = await this.notionAccessService.fetchDatabases();
         for (const database of databases) {
-            const title = database.title[0].plain_text;
+            const title = this.databaseTitleReader.read(database);
             const id = database.id;
 
             const includes = Array.isArray(config.includes) ? config.includes : [];

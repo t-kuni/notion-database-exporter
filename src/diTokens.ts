@@ -8,6 +8,7 @@ export const DI = {
             INotionAccessService: uuidv4(),
             ITargetDatabaseCheckService: uuidv4(),
             SecretReadService: uuidv4(),
+            DatabaseTitleReadService: uuidv4(),
         },
         UseCases: {
             MainInteractor: uuidv4(),

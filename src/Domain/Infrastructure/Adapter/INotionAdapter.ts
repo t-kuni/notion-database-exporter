@@ -1,7 +1,7 @@
 export interface INotionAdapter {
-    fetchDatabaseList(startCursor: string = null): Promise<FetchDatabaseResult>;
+    fetchDatabaseList(startCursor?: string): Promise<FetchDatabaseResult>;
 
-    queryDatabase(id: string, startCursor: string = null): Promise<QueryDatabaseResult>;
+    queryDatabase(id: string, startCursor?: string): Promise<QueryDatabaseResult>;
 
     retrieveDatabase(id: string): Promise<RetrieveDatabaseResult>;
 }

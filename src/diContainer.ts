@@ -13,6 +13,7 @@ import {Directory} from "./Infrastructure/System/Directory";
 import {NotionAccessService} from "./Application/Services/NotionAccessService";
 import {TargetDatabaseCheckService} from "./Application/Services/TargetDatabaseCheckService";
 import {SecretReadService} from "./Application/Services/SecretReadService";
+import {DatabaseTitleReadService} from "./Application/Services/DatabaseTitleReadService";
 
 // Application / UseCases
 container.register(DI.Application.UseCases.MainInteractor, {useClass: MainInteractor});
@@ -23,6 +24,7 @@ container.register(DI.Application.Services.SecretReadService, {useClass: SecretR
 container.register(DI.Application.Services.NotionDbToArrayService, {useClass: NotionDbToArrayService});
 container.register(DI.Application.Services.INotionAccessService, {useClass: NotionAccessService});
 container.register(DI.Application.Services.ITargetDatabaseCheckService, {useClass: TargetDatabaseCheckService});
+container.register(DI.Application.Services.DatabaseTitleReadService, {useClass: DatabaseTitleReadService});
 
 // Domain / Infrastructure / Adapter
 container.register(DI.Domain.Infrastructure.Adapters.INotionAdapter, {useClass: NotionAdapter});

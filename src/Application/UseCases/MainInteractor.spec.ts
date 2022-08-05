@@ -88,7 +88,10 @@ describe('MainInteractor', () => {
                                 id: "ID1",
                                 title: [
                                     {
-                                        plain_text: "DB1"
+                                        plain_text: "NAME1"
+                                    },
+                                    {
+                                        plain_text: "NAME2"
                                     }
                                 ]
                             }
@@ -118,7 +121,7 @@ describe('MainInteractor', () => {
                     const fn = mock.write = jest.fn()
                     mockAsserts.push(() => {
                         const expectCsv = "PROP1\n1\n"
-                        expect(fn.mock.calls[0][0]).toBe("TEST_OUT_DIR/DB1.csv");
+                        expect(fn.mock.calls[0][0]).toBe("TEST_OUT_DIR/NAME1NAME2.csv");
                         expect(fn.mock.calls[0][1]).toBe(expectCsv);
                     })
                 }
